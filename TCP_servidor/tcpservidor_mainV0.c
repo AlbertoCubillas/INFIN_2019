@@ -55,11 +55,23 @@ int main(int argc, char *argv[])
 	int 		temp2;
 	int 		NumMues;
 	int 		result;
-	int 		codigoretorno = 0;
+	
+	char		codigoretorno[1];
 	char 		readpalabra[256];
+	
+	char 		M[1]="M";
+	char 		U[1]="U";
+	char 		X[1]="X";
+	char 		Y[1]="Y";
+	char 		R[1]="R";
+	char 		B[1]="B";
+	char 		parentesisabierto[1]= "(";
+	char 		parentesiscerrado[1]= ")";
+	
 	char		writepalabra[256];
 	char		buffer[256];
-	char		missatge[] ="((2)(0,23.3)(10,23.3))";
+	char		missatge[256];
+	
 
 	/*Preparar l'adreça local*/
 	sockAddrSize=sizeof(struct sockaddr_in);
@@ -110,7 +122,11 @@ int main(int argc, char *argv[])
 													switch (readpalabra[6])
 													{
 														case ')':
-														codigoretorno = 0;
+														codigoretorno[1] = '0';
+															strcpy(missatge,parentesisabierto);
+															strcat(missatge,M);
+															strcat(missatge,codigoretorno);
+															strcat(missatge,parentesiscerrado);
 														break;
 													}	
 										break;
@@ -118,9 +134,14 @@ int main(int argc, char *argv[])
 										//printf("%c",palabra[2]);
 												temp1 = readpalabra[3] - '0';  //El valores de tiempo se convierte en numero entero.
 												temp2 = readpalabra[4] - '0';  //El valores de tiempo se convierte en numero entero.
-												if (temp1>2)
+												if (temp1>=2)
 												{
-													codigoretorno = 2;
+													if (temp2>0)
+													codigoretorno[1] = '2';
+															strcpy(missatge,parentesisabierto);
+															strcat(missatge,M);
+															strcat(missatge,codigoretorno);
+															strcat(missatge,parentesiscerrado);
 													break;
 												}
 												//printf("%d",temp1);
@@ -129,16 +150,27 @@ int main(int argc, char *argv[])
 													switch (readpalabra[6])
 													{
 														case ')':
-														codigoretorno = 0;
-														
+														codigoretorno[1] = '0';
+															strcpy(missatge,parentesisabierto);
+															strcat(missatge,M);
+															strcat(missatge,codigoretorno);
+															strcat(missatge,parentesiscerrado);
 														break;
 														default:
-														codigoretorno = 2;
+														codigoretorno[1] = '2';
+															strcpy(missatge,parentesisabierto);
+															strcat(missatge,M);
+															strcat(missatge,codigoretorno);
+															strcat(missatge,parentesiscerrado);
 														break;
 													}	
 										break;	
 										default:
-										codigoretorno = 2;
+										codigoretorno[1] = '2';
+														strcpy(missatge,parentesisabierto);
+														strcat(missatge,M);
+														strcat(missatge,codigoretorno);
+														strcat(missatge,parentesiscerrado);
 										break;
 									}
 							
@@ -146,10 +178,15 @@ int main(int argc, char *argv[])
 							case 'U':
 									switch (readpalabra[2]){
 										case ')':
-										codigoretorno = 0;
+										codigoretorno[1]= '0';
 										break;
 														default:
-														codigoretorno = 2;
+														codigoretorno[1] = '2';
+														strcpy(missatge,parentesisabierto);
+														strcat(missatge,U);
+														
+														
+														
 														break;
 													}
 							break;
@@ -157,10 +194,10 @@ int main(int argc, char *argv[])
 							case 'X':
 									switch (readpalabra[2]){
 										case ')':
-										codigoretorno = 0;
+										codigoretorno[1]= '0';
 										break;
 														default:
-														codigoretorno = 2;
+														codigoretorno[1]= '2';
 														break;
 													}
 							break;
@@ -168,10 +205,10 @@ int main(int argc, char *argv[])
 							case 'Y':
 									switch (readpalabra[2]){
 										case ')':
-										codigoretorno = 0;
+										codigoretorno[1]= '0';
 										break;
 														default:
-														codigoretorno = 2;
+														codigoretorno[1] = '2';
 														break;
 													}
 							break;
@@ -179,10 +216,10 @@ int main(int argc, char *argv[])
 							case 'R':
 									switch (readpalabra[2]){
 										case ')':
-										codigoretorno = 0;
+										codigoretorno[1] = '0';
 										break;
 														default:
-														codigoretorno = 2;
+														codigoretorno[1] = '2';
 														break;
 													}
 							break;
@@ -190,10 +227,10 @@ int main(int argc, char *argv[])
 							case 'B':
 									switch (readpalabra[2]){
 										case ')':
-										codigoretorno = 0;
+										codigoretorno[1] = '0';
 										break;
 														default:
-														codigoretorno = 2;
+														codigoretorno[1] = '2';
 														break;
 													}
 							break;
@@ -201,11 +238,11 @@ int main(int argc, char *argv[])
 						break;			
 				break;
 					default:
-					codigoretorno = 1;
+					codigoretorno[1] = '1';
 					break;
 					}	
 			default:
-					codigoretorno = 1;
+					codigoretorno[1] = '1';
 					break;
 			}		
 			
@@ -228,6 +265,7 @@ int main(int argc, char *argv[])
 	}
 	
 }
+void media_temperatura(
 
 
 
